@@ -29,6 +29,7 @@ import sys
 import re
 import json
 
+
 def get_kv_map(file):
 
     img_test = file.read()
@@ -37,13 +38,15 @@ def get_kv_map(file):
 
     # process using image bytes
     client = boto3.client('textract')
-    response = client.analyze_document(Document={'Bytes': bytes_test}, FeatureTypes=['FORMS'])
+    response = client.analyze_document(
+        Document={'Bytes': bytes_test}, FeatureTypes=['FORMS'])
 
     print(response.keys())
 
     # Get the text blocks
-    blocks=response['Blocks']
-    
+    blocks = response['Blocks']
+
+    lines = []
 
     # get key and value maps
     key_map = {}
@@ -59,9 +62,9 @@ def get_kv_map(file):
                 value_map[block_id] = block
 
         if block['BlockType'] == 'LINE':
-          print(block['Text'])
+            lines.append(block['Text'])
 
-    return key_map, value_map, block_map
+    return key_map, value_map, block_map, lines
 
 
 def get_kv_relationship(key_map, value_map, block_map):
@@ -93,34 +96,15 @@ def get_text(result, blocks_map):
                         text += word['Text'] + ' '
                     if word['BlockType'] == 'SELECTION_ELEMENT':
                         if word['SelectionStatus'] == 'SELECTED':
-                            text += 'X '    
+                            text += 'X '
 
-                                
     return text
 
 
-def print_kvs(kvs):
-    for key, value in kvs.items():
-        print(key, ":", value)
-
-
-def search_value(kvs, search_key):
-    for key, value in kvs.items():
-        if re.search(search_key, key, re.IGNORECASE):
-            return value
-
 def extractText(file):
-
-    key_map, value_map, block_map = get_kv_map(file)
+    key_map, value_map, block_map, lines = get_kv_map(file)
 
     # Get Key Value relationship
     kvs = get_kv_relationship(key_map, value_map, block_map)
-    print("\n\n== FOUND KEY : VALUE pairs ===\n")
-    print_kvs(kvs)
-
-    # Start searching a key value
-    while input('\n Do you want to search a value for a key? (enter "n" for exit) ') != 'n':
-        search_key = input('\n Enter a search key:')
-        print('The value is:', search_value(kvs, search_key))
-
+    return (lines, kvs)
 # snippet-end:[textract.python.textract_python_kv_parser.complete]

@@ -1,7 +1,7 @@
 import os
 from flask import Flask, flash, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
-import modules.ocr.service
+import modules.ocr.service as OcrService
 
 UPLOAD_FOLDER = '/upload_file'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -38,7 +38,9 @@ def upload_file():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         print(filename)
-        return 'success'
+        lines, kvs = OcrService.extractText(file)
+        return jsonify(lines=lines, kvs=kvs)
+
 
 @app.route('/test', methods=['GET'])
 def test():
