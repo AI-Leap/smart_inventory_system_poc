@@ -1,7 +1,7 @@
 import os
 from flask import Flask, flash, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
-import modules.ocr.service as OcrService
+import modules.textract.service as OcrService
 
 UPLOAD_FOLDER = '/upload_file'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -45,4 +45,10 @@ def upload_file():
 @app.route('/test', methods=['GET'])
 def test():
     print('this is test')
-    return 'f'
+
+# run the app.
+if __name__ == "__main__":
+    # Setting debug to True enables debug output. This line should be
+    # removed before deploying a production app.
+    app.debug = True
+    app.run()
