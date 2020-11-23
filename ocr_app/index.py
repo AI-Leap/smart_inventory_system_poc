@@ -6,11 +6,11 @@ import modules.textract.service as OcrService
 UPLOAD_FOLDER = '/upload_file'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application = Flask(__name__)
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-@app.route('/')
+@application.route('/')
 def hello_world():
     return 'Hello, World!'
 
@@ -23,7 +23,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/ocr', methods=['POST'])
+@application.route('/ocr', methods=['POST'])
 def upload_file():
     # check if the post request has the file part
     if 'file' not in request.files:
@@ -42,7 +42,7 @@ def upload_file():
         return jsonify(lines=lines, kvs=kvs)
 
 
-@app.route('/test', methods=['GET'])
+@application.route('/test', methods=['GET'])
 def test():
     print('this is test')
 
@@ -50,5 +50,5 @@ def test():
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    app.debug = True
-    app.run()
+    application.debug = True
+    application.run()
