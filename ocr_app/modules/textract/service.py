@@ -25,6 +25,7 @@
 # snippet-sourceauthor:[reesch (AWS)]
 # snippet-start:[textract.python.textract_python_kv_parser.complete]
 import boto3
+from botocore.config import Config
 
 
 def get_kv_map(file):
@@ -34,7 +35,17 @@ def get_kv_map(file):
     # print('Image loaded', file_name)
 
     # process using image bytes
-    client = boto3.client('textract')
+
+    session = boto3.Session(
+        aws_access_key_id = 'AKIA3EPZDRF2RLI6ISPV',
+        aws_secret_access_key = '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'
+    )
+    my_config = Config(
+        region_name = 'ap-southeast-1',
+    )
+
+    client = boto3.client('textract', config=my_config)
+
     response = client.analyze_document(
         Document={'Bytes': bytes_test}, FeatureTypes=['FORMS'])
 
