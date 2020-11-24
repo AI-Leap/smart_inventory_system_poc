@@ -36,15 +36,19 @@ def get_kv_map(file):
 
     # process using image bytes
 
-    session = boto3.Session(
-        aws_access_key_id = 'AKIA3EPZDRF2RLI6ISPV',
-        aws_secret_access_key = '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'
-    )
-    my_config = Config(
-        region_name = 'ap-southeast-1',
-    )
+    # session = boto3.Session(
+    #     aws_access_key_id = 'AKIA3EPZDRF2RLI6ISPV',
+    #     aws_secret_access_key = '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'
+    # )
+    # my_config = Config(
+    #     region_name = 'ap-southeast-1',
+    # )
 
-    client = boto3.client('textract', config=my_config)
+    client = boto3.client('textract', 
+        aws_access_key_id = 'AKIA3EPZDRF2RLI6ISPV',
+        aws_secret_access_key = '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',
+        region_name = 'ap-southeast-1'
+    )
 
     response = client.analyze_document(
         Document={'Bytes': bytes_test}, FeatureTypes=['FORMS'])
