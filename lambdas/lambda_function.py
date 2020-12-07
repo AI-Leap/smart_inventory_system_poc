@@ -3,7 +3,7 @@ import logging
 
 import pymysql
 #rds settings
-rds_host  = "awba.c7xhqvq8qokj.ap-southeast-1.rds.amazonaws.com"
+rds_host  = 'awba.c7xhqvq8qokj.ap-southeast-1.rds.amazonaws.com'
 name = 'root'
 password = 'toor2020'
 db_name = 'awba'
@@ -23,16 +23,12 @@ except pymysql.MySQLError as e:
 import json
 
 def lambda_handler(event, context):
-    # TODO implement
-    print('I am triggered. LOL!')
-    
-    bucket = event['Records'][0]['s3']['bucket']
     key = event['Records'][0]['s3']['object']['key']
+    print(key)
     
     # detect_labels(key, bucket)
-    detect_labels('sample.jpg', 'awba-objects')
+    detect_labels(key, 'awba-objects')
     
-    print('I am complete')
     return {
         'statusCode': 200,
         'body': json.dumps('Hello from Lambda!')
