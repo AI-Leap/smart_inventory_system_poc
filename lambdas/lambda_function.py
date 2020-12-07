@@ -1,30 +1,8 @@
-import sys
-import logging
-
-import pymysql
-#rds settings
-rds_host  = 'awba.c7xhqvq8qokj.ap-southeast-1.rds.amazonaws.com'
-name = 'root'
-password = 'toor2020'
-db_name = 'awba'
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-try:
-    conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
-    print('connected to database')
-    print(conn)
-except pymysql.MySQLError as e:
-    logger.error("ERROR: Unexpected error: Could not connect to MySQL instance.")
-    logger.error(e)
-    sys.exit()
-    
 import json
+import database_functions
 
 def lambda_handler(event, context):
     key = event['Records'][0]['s3']['object']['key']
-    print(key)
     
     # detect_labels(key, bucket)
     detect_labels(key, 'awba-objects')
@@ -48,15 +26,16 @@ def detect_labels(photo, bucket):
     for label in response['Labels']:
         print ("Label: " + label['Name'])
         print ("Confidence: " + str(label['Confidence']))
-        print ("Instances:")
-        for instance in label['Instances']:
-            print ("  Bounding box")
-            print ("    Top: " + str(instance['BoundingBox']['Top']))
-            print ("    Left: " + str(instance['BoundingBox']['Left']))
-            print ("    Width: " +  str(instance['BoundingBox']['Width']))
-            print ("    Height: " +  str(instance['BoundingBox']['Height']))
-            print ("  Confidence: " + str(instance['Confidence']))
-            print()
+        database_functions.save(photo, label['Name'], label['Confidence'])
+        # print ("Instances:")
+        # for instance in label['Instances']:
+        #     print ("  Bounding box")
+        #     print ("    Top: " + str(instance['BoundingBox']['Top']))
+        #     print ("    Left: " + str(instance['BoundingBox']['Left']))
+        #     print ("    Width: " +  str(instance['BoundingBox']['Width']))
+        #     print ("    Height: " +  str(instance['BoundingBox']['Height']))
+        #     print ("  Confidence: " + str(instance['Confidence']))
+        #     print()
 
         print ("Parents:")
         for parent in label['Parents']:
