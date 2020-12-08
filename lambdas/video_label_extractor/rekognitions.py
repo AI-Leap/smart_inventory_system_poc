@@ -7,6 +7,7 @@ def get_label_detection_results(jobId):
     maxResults = 10
     paginationToken = ''
     finished = False
+    results = []
 
     while finished == False:
         response = rek.get_label_detection(JobId=jobId,
@@ -47,3 +48,7 @@ def get_label_detection_results(jobId):
                 paginationToken = response['NextToken']
             else:
                 finished = True
+
+        results.append(response['Labels'])
+  
+    return results
