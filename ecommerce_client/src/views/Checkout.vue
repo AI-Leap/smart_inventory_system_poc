@@ -35,6 +35,7 @@
             placeholder="Email"
             v-model="email"
             outlined
+            :disabled="hasLoggedIn"
           />
           <v-textarea
             placeholder="Delivery Address"
@@ -92,6 +93,7 @@ export default {
     billingAddress: '',
     isLoading: false,
     isSuccessful: false,
+    hasLoggedIn: false,
   }),
 
   computed: {
@@ -124,6 +126,18 @@ export default {
         this.isSuccessful = true;
       }
     },
+
+    setEmail() {
+      const { email } = this.$store.state;
+      if (email.length > 0) {
+        this.hasLoggedIn = true;
+        this.email = email;
+      }
+    },
+  },
+
+  mounted() {
+    this.setEmail();
   },
 };
 </script>
