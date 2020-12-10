@@ -6,6 +6,29 @@
     >
       You don't have any order.
     </v-chip>
+    <v-list
+      v-else
+    >
+      <v-list-item
+        v-for="(order, i) in orders"
+        :key="i"
+      >
+        <v-row>
+          <v-col cols="2">
+            Order ID: {{ order.id }}
+          </v-col>
+          <v-col>
+            <v-progress-linear
+              :buffer-value="`${(order.delivery_status * 25) + 50}`"
+              color="success"
+              stream
+              :value="`${(order.delivery_status * 25) + 25}`"
+              height="30"
+            />
+          </v-col>
+        </v-row>
+      </v-list-item>
+    </v-list>
   </v-container>
 </template>
 <script>
