@@ -71,6 +71,12 @@ export default {
 
     viewOrder(order) {
       console.log(order);
+      this.$router.push({
+        name: 'order-detail',
+        params: {
+          order,
+        },
+      });
     },
   },
 

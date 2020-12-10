@@ -5,6 +5,7 @@ import AIAssited from '../views/AIAssisted.vue';
 import Orders from '../views/Orders.vue';
 import Inventories from '../views/Inventories.vue';
 import Delivery from '../views/Delivery.vue';
+import OrderDetail from '../views/OrderDetail.vue';
 
 Vue.use(VueRouter);
 
@@ -42,7 +43,12 @@ const routes = [
     name: 'delivery',
     component: Delivery,
   },
-
+  {
+    path: '/order-detail',
+    name: 'order-detail',
+    component: OrderDetail,
+    props: true,
+  },
 ];
 
 const router = new VueRouter({
