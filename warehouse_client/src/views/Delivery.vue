@@ -63,6 +63,7 @@
 
 <script>
 import draggable from 'vuedraggable';
+import axios from 'axios';
 import DeliveryItem from '@/components/delivery/DeliveryItem.vue';
 
 export default {
@@ -109,7 +110,32 @@ export default {
       ],
       items3: [],
       items4: [],
+      orders: [],
     };
+  },
+
+  methods: {
+    async getOrders() {
+      console.log('getting orders');
+      const url = `${process.env.VUE_APP_SERVER_URL}/orders`;
+      const ret = await axios.get(url);
+      console.log(ret);
+      this.orders = ret.data;
+    },
+
+    viewOrder(order) {
+      console.log(order);
+      this.$router.push({
+        name: 'order-detail',
+        params: {
+          order,
+        },
+      });
+    },
+  },
+
+  mounted() {
+    this.getOrders();
   },
 };
 </script>
