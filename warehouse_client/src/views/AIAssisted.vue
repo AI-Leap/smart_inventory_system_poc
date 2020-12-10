@@ -17,6 +17,16 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-img
+        v-if="imageUrl.length > 0"
+        :src="imageUrl"
+        max-width="500"
+      />
+      <video v-if="videoUrl" width="500" controls>
+        <source :src="videoUrl" type="video/mp4">
+      </video>
+    </v-row>
+    <v-row>
       <v-col>
         <v-btn large outlined color="success" :loading=isGetting @click="getAnalysis">
           Get Analysis
@@ -55,6 +65,8 @@ export default {
         value: 'timestamp',
       },
     ],
+    imageUrl: '',
+    videoUrl: '',
   }),
 
   methods: {
@@ -63,9 +75,8 @@ export default {
       const formData = new FormData();
       formData.append('image', this.image);
 
-      const url = this.image.type.includes('image')
-        ? 'http://localhost:4000/api/ai/images'
-        : 'http://localhost:4000/api/ai/videos';
+      const fileType = this.image.type.split('/')[0];
+      const url = `${process.env.VUE_APP_SERVER_URL}/ai/${fileType}s`;
 
       const ret = await axios.post(url, formData, {
         headers: {
@@ -75,6 +86,11 @@ export default {
 
       if (ret) {
         this.isUploading = false;
+        if (fileType === 'image') {
+          this.imageUrl = ret.data.url;
+        } else {
+          this.videoUrl = ret.data.url;
+        }
       }
     },
 
