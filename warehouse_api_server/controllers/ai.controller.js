@@ -7,10 +7,10 @@ const controller = {
 
     const query = `SELECT * FROM image_detections WHERE confidence > 90 AND image_key = '${image_key}'`;
 
-    const ret = await connection.query(query);
-
-    console.log(ret);
-    return res.status(200).send();
+    connection.query(query, function (error, results, fields) {
+      if (error) throw error;
+      return res.status(200).send(JSON.stringify(results));
+    });
   },
 };
 
