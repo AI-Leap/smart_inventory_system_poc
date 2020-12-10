@@ -74,43 +74,11 @@ export default {
 
   data() {
     return {
-      items: [
-        {
-          id: 1,
-          avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/1.jpg',
-          title: 'Brunch this life?',
-          subtitle: 'Subtitle 1',
-        },
-        {
-          id: 2,
-          avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/2.jpg',
-          title: 'Winter Lunch',
-          subtitle: 'Subtitle 2',
-        },
-        {
-          id: 3,
-          avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/3.jpg',
-          title: 'Oui oui',
-          subtitle: 'Subtitle 3',
-        },
-      ],
-      items2: [
-        {
-          id: 4,
-          avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/4.jpg',
-          title: 'Brunch this weekend?',
-          subtitle: 'Subtitle 4',
-        },
-        {
-          id: 5,
-          avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/5.jpg',
-          title: 'Summer BBQ',
-          subtitle: 'Subtitle 5',
-        },
-      ],
+      orders: [],
+      items: [],
+      items2: [],
       items3: [],
       items4: [],
-      orders: [],
     };
   },
 
@@ -121,6 +89,11 @@ export default {
       const ret = await axios.get(url);
       console.log(ret);
       this.orders = ret.data;
+
+      this.items = this.orders.filter((e) => e.delivery_status === 0);
+      this.items2 = this.orders.filter((e) => e.delivery_status === 1);
+      this.items3 = this.orders.filter((e) => e.delivery_status === 2);
+      this.items4 = this.orders.filter((e) => e.delivery_status === 3);
     },
 
     viewOrder(order) {
