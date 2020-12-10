@@ -1,20 +1,16 @@
 <template>
   <v-container>
     Checkout
-    {{ orders }}
+    {{ cart }}
   </v-container>
 </template>
 
 <script>
-import EventBus from '@/utils/event';
-
 export default {
-  data: () => ({
-    orders: [],
-  }),
-
-  mounted() {
-    EventBus.$on('add-item', (item) => console.log(item));
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
   },
 };
 </script>

@@ -35,7 +35,6 @@
 export default {
   methods: {
     addToCart(itemId) {
-      console.log(itemId);
       this.$store.dispatch('addToCart', itemId);
     },
   },
