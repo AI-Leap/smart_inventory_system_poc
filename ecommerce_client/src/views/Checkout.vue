@@ -10,6 +10,10 @@
           :headers="headers"
           :items="cart"
         />
+        <v-chip class="ma-2" color="primary" outlined pill>
+          Total: {{ total }} MMK
+          <v-icon right> mdi-dollar-outline </v-icon>
+        </v-chip>
       </v-col>
       <v-col cols="3">
         <v-chip class="ma-2" color="primary" outlined pill>
@@ -68,7 +72,7 @@ export default {
         value: 'qty',
       },
       {
-        total: 'Amount',
+        text: 'Amount',
         value: 'amount',
       },
     ],
@@ -82,6 +86,9 @@ export default {
   computed: {
     cart() {
       return this.$store.state.cart;
+    },
+    total() {
+      return this.cart.reduce((acc, cur) => acc + cur.amount, 0);
     },
   },
 
