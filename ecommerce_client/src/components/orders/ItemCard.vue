@@ -39,6 +39,7 @@ export default {
     addToCart() {
       this.$store.dispatch('addToCart', {
         id: this.item.id,
+        name: this.item.name,
         qty: this.qty,
       });
     },
