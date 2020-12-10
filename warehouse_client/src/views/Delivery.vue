@@ -9,18 +9,8 @@
             :options="{ group: 'people' }"
             style="min-height: 10px"
           >
-            <template v-for="item in items">
-              <v-list-tile :key="item.id" avatar>
-                <v-list-tile-avatar>
-                  <img :src="item.avatar" />
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                  <v-list-tile-sub-title
-                    v-html="item.subtitle"
-                  ></v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
+            <template v-for="(item, i) in items">
+              <label :key="i">{{ item }}</label>
             </template>
           </draggable>
         </v-list>
@@ -33,18 +23,8 @@
             :options="{ group: 'people' }"
             style="min-height: 10px"
           >
-            <template v-for="item in items2">
-              <v-list-tile :key="item.id" avatar>
-                <v-list-tile-avatar>
-                  <img :src="item.avatar" />
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                  <v-list-tile-sub-title
-                    v-html="item.subtitle"
-                  ></v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
+            <template v-for="(item, i) in items2">
+              <label :key="i">{{ item }}</label>
             </template>
           </draggable>
         </v-list>
@@ -54,7 +34,13 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable';
+
 export default {
+  components: {
+    draggable,
+  },
+
   data() {
     return {
       items: [
