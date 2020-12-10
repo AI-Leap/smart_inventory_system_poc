@@ -67,6 +67,10 @@ export default {
         text: 'QTY',
         value: 'qty',
       },
+      {
+        total: 'Amount',
+        value: 'amount',
+      },
     ],
     name: '',
     phone: '',

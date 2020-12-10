@@ -1,6 +1,7 @@
 <template>
   <v-card elevation="2" outlined shaped>
     <v-card-title> {{ item.name }} </v-card-title>
+    <v-card-subtitle>{{ item.price }} MMK</v-card-subtitle>
     <v-card-text>
       <v-img contain :src="item.url" max-height="200" />
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat officiis
@@ -40,6 +41,7 @@ export default {
       this.$store.dispatch('addToCart', {
         id: this.item.id,
         name: this.item.name,
+        amount: this.item.price * this.qty,
         qty: this.qty,
       });
     },
