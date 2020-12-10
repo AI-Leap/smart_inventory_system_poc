@@ -11,7 +11,19 @@
             magnam fuga laboriosam nobis at voluptatum!
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary"> Add To Cart </v-btn>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  type="number"
+                  outlined
+                  small
+                  placeholder="QTY"
+                />
+              </v-col>
+              <v-col>
+                <v-btn color="success" outlined large> Add To Cart </v-btn>
+              </v-col>
+            </v-row>
           </v-card-actions>
         </v-card>
       </v-col>
