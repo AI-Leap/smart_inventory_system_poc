@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data: () => ({
     headers: [
@@ -94,7 +96,19 @@ export default {
 
   methods: {
     async checkout() {
-      console.log('checkout');
+      const url = `${process.env.VUE_APP_SERVER_URL}/api/orders`;
+      const ret = await axios.post(url, {
+        name: this.name,
+        phone: this.phone,
+        email: this.email,
+        deliveryAddress: this.deliveryAddress,
+        billingAddress: this.billingAddress,
+        cart: this.cart,
+      });
+
+      if (ret) {
+        console.log(ret);
+      }
     },
   },
 };

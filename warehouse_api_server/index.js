@@ -20,13 +20,11 @@ app.use(bodyParser.json({limit: '500mb'}));
 app.use(bodyParser.urlencoded({limit: '500mb', extended: true, parameterLimit:500000}));
 // Routes
 var InventoryRoute = require('./routes/InventoryRoute');
-var OrderRoute = require('./routes/OrderRoute');
-// var SurveyRoute = require('./routes/SurveyRoute');
-// var UserRoute = require('./routes/UserRoute');
+
 app.use('/api/inventory', InventoryRoute);
-app.use('/api/order', OrderRoute);
+// app.use('/api/order', OrderRoute);
 app.use('/api/ai', require('./routes/ai.routes'));
-// app.use('/api/user', UserRoute);
+app.use('/api/orders', require('./routes/order.routes'));
 
 app.use(function(req, res, next) {
   next(createError(404));
