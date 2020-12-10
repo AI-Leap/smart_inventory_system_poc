@@ -10,11 +10,7 @@
             style="min-height: 10px"
           >
             <template v-for="(item, i) in items">
-              <v-card :key="i">
-                <v-card-title>
-                  {{ item.title }}
-                </v-card-title>
-              </v-card>
+              <DeliveryItem :key="i" :item="item" />
             </template>
           </draggable>
         </v-list>
@@ -28,11 +24,7 @@
             style="min-height: 10px"
           >
             <template v-for="(item, i) in items2">
-              <v-card :key="i">
-                <v-card-title>
-                  {{ item.title }}
-                </v-card-title>
-              </v-card>
+              <DeliveryItem :key="i" :item="item" />
             </template>
           </draggable>
         </v-list>
@@ -46,11 +38,7 @@
             style="min-height: 10px"
           >
             <template v-for="(item, i) in items3">
-              <v-card :key="i">
-                <v-card-title>
-                  {{ item.title }}
-                </v-card-title>
-              </v-card>
+              <DeliveryItem :key="i" :item="item" />
             </template>
           </draggable>
         </v-list>
@@ -64,11 +52,7 @@
             style="min-height: 10px"
           >
             <template v-for="(item, i) in items4">
-              <v-card :key="i">
-                <v-card-title>
-                  {{ item.title }}
-                </v-card-title>
-              </v-card>
+              <DeliveryItem :key="i" :item="item" />
             </template>
           </draggable>
         </v-list>
@@ -79,10 +63,12 @@
 
 <script>
 import draggable from 'vuedraggable';
+import DeliveryItem from '@/components/delivery/DeliveryItem.vue';
 
 export default {
   components: {
     draggable,
+    DeliveryItem,
   },
 
   data() {
