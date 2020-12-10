@@ -13,12 +13,12 @@
         />
       </v-col>
       <v-col>
-        <v-btn large outlined color="primary" @click="upload"> Upload </v-btn>
+        <v-btn large outlined color="primary" @click="upload" :loading=isUploading> Upload </v-btn>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <v-btn large outlined color="success" @click="getAnalysis">
+        <v-btn large outlined color="success" :loading=isGetting @click="getAnalysis">
           Get Analysis
         </v-btn>
       </v-col>
@@ -32,10 +32,13 @@ import axios from 'axios';
 export default {
   data: () => ({
     image: null,
+    isUploading: false,
+    isGetting: false,
   }),
 
   methods: {
     async upload() {
+      this.isUploading = true;
       const formData = new FormData();
       formData.append('image', this.image);
 
@@ -48,11 +51,24 @@ export default {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(ret);
+
+      if (ret) {
+        this.isUploading = false;
+      }
     },
 
     async getAnalysis() {
-      console.log(this.image);
+      this.isGetting = true;
+      const fileKey = this.image.name.replace(' ', '_');
+      const fileType = this.image.type.includes('image') ? 'images' : 'videos';
+      const url = `${process.env.VUE_APP_SERVER_URL}/ai/${fileType}/${fileKey}`;
+
+      const ret = await axios.get(url);
+
+      if (ret) {
+        this.isGetting = false;
+        console.log(ret);
+      }
     },
   },
 };

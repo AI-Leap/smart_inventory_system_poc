@@ -32,10 +32,10 @@ const upload = multer({
   storage: multerS3({
     acl: 'public-read',
     s3,
-    bucket: process.env.BUCKET,
+    bucket: process.env.IMAGE_BUCKET,
     key: (req, file, cb) => {
       const fileName = file.originalname.replace(' ', '-');
-      const imageUrl = `https://${process.env.BUCKET}.s3-ap-southeast-1.amazonaws.com/${fileName}`;
+      const imageUrl = `https://${process.env.IMAGE_BUCKET}.s3-ap-southeast-1.amazonaws.com/${fileName}`;
       req.body.imageUrl = imageUrl;
       return cb(null, fileName);
     },
