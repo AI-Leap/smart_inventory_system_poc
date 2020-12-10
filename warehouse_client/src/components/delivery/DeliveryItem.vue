@@ -1,10 +1,10 @@
 <template>
   <v-card class="my-3">
     <v-card-title>
-      {{ item.name }}
+      Order ID: {{ item.id }}
     </v-card-title>
     <v-card-subtitle>
-      {{ item.phone }}
+      {{ item.name }}, {{ item.phone }}
     </v-card-subtitle>
   </v-card>
 </template>
