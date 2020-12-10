@@ -6,10 +6,15 @@
     </v-chip>
     <v-row>
       <v-col>
-        <v-file-input outlined prepend-icon="mdi-camera" v-model="image" />
+        <v-file-input outlined prepend-inner-icon="mdi-camera" v-model="image" />
       </v-col>
       <v-col>
         <v-btn large outlined color="primary" @click="upload"> Upload </v-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-btn large outlined color="success" @click="getAnalysis"> Get Analysis </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -33,6 +38,10 @@ export default {
         },
       });
       console.log(ret);
+    },
+
+    async getAnalysis() {
+      console.log('get');
     },
   },
 };

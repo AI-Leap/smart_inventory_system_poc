@@ -1,9 +1,9 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-var connection = mysql.createConnection({
-    host: 'phoenixdb.cxq8dablzom7.us-east-2.rds.amazonaws.com',
+const connection = mysql.createConnection({
+    host: 'awba.c7xhqvq8qokj.ap-southeast-1.rds.amazonaws.com',
     user: 'root',
-    password: 'passw0rd',
+    password: 'toor2020',
     database: 'awba'
 });
 
