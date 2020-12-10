@@ -1,10 +1,26 @@
 <template>
   <v-container>
-    Inventories
+    <v-select
+      outlined
+      label="Warehouse"
+      :items="['Warehouse 1', 'Warehouse 2', 'Warehouse 3', 'Warehouse 4']"
+      @change="refreshQty"
+    />
     <v-data-table
       :headers="headers"
       :items="inventory"
-    />
+    >
+      <template v-slot:item.url="{ item }">
+        <v-img
+          :src="item.url"
+          max-height="50"
+          contain
+        />
+      </template>
+      <!-- <template v-slot:item.qty="{}">
+        {{ (Math.random() * (10000 - 1000) + 1000).toFixed(0) }}
+      </template> -->
+    </v-data-table>
   </v-container>
 </template>
 
@@ -35,7 +51,6 @@ export default {
         name: 'PAWN KILLER PLUS 360SL  1LT',
         price: 3600,
         url: 'https://awba-other-images.s3-ap-southeast-1.amazonaws.com/PaungKiller.png',
-        qty: 1000,
       },
       {
         id: 1,
@@ -105,5 +120,15 @@ export default {
       },
     ],
   }),
+
+  methods: {
+    refreshQty() {
+      console.log('qty');
+      this.inventory = this.inventory.map((e) => ({
+        ...e,
+        qty: (Math.random() * (10000 - 1000) + 1000).toFixed(0),
+      }));
+    },
+  },
 };
 </script>
