@@ -3,7 +3,23 @@
     <v-data-table
       :headers="headers"
       :items="orders"
-    />
+    >
+      <template v-slot:item.actions="{ item }">
+        <v-btn
+          outlined
+          @click="viewOrder(item)"
+          color="primary"
+        >
+          <v-icon
+            small
+            class="mr-2"
+          >
+            mdi-eye
+          </v-icon>
+          View
+        </v-btn>
+      </template>
+    </v-data-table>
   </v-container>
 </template>
 
@@ -38,6 +54,11 @@ export default {
         text: 'Billing Address',
         value: 'billing_address',
       },
+      {
+        text: 'Actions',
+        value: 'actions',
+        sortable: false,
+      },
     ],
   }),
 
@@ -46,6 +67,10 @@ export default {
       const url = `${process.env.VUE_APP_SERVER_URL}/orders`;
       const ret = await axios.get(url);
       this.orders = ret.data;
+    },
+
+    viewOrder(order) {
+      console.log(order);
     },
   },
 
