@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="3" v-for="i in 9" :key="i">
         <v-card :key="i" elevation="2" outlined shaped>
-          <v-card-title> Product 1 </v-card-title>
+          <v-card-title> Product {{ i }} </v-card-title>
           <v-card-text>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
             officiis obcaecati consequatur, molestiae autem nostrum voluptatibus
@@ -21,7 +21,7 @@
                 />
               </v-col>
               <v-col>
-                <v-btn color="success" outlined large> Add To Cart </v-btn>
+                <v-btn color="success" outlined large @click="addToCart(i)"> Add To Cart </v-btn>
               </v-col>
             </v-row>
           </v-card-actions>
@@ -32,5 +32,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    addToCart(itemId) {
+      console.log(itemId);
+      this.$store.dispatch('addToCart', itemId);
+    },
+  },
+};
 </script>
