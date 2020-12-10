@@ -19,6 +19,15 @@ const controller = {
     });
   },
 
+  getOrdersByEmail: async (req, res) => {
+    const { email } = req.params;
+    const query = `SELECT * FROM orders WHERE email = '${email}'`;
+    connection.query(query, function (error, results, fields) {
+      if (error) throw error;
+      return res.status(200).send(JSON.stringify(results));
+    });
+  },
+
   updateOrderStatus: async (req, res) => {
     const { id } = req.params;
     const { delivery_status } = req.body;
