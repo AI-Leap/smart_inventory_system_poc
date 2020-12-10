@@ -50,9 +50,16 @@
             @click="checkout"
             color="primary"
             large
+            :loading="isLoading"
           >
             Checkout
           </v-btn>
+          <v-alert
+            v-if="isSuccessful"
+            type="success"
+          >
+            Order Submitted Successfully
+          </v-alert>
         </v-form>
       </v-col>
     </v-row>
@@ -83,6 +90,8 @@ export default {
     email: '',
     deliveryAddress: '',
     billingAddress: '',
+    isLoading: false,
+    isSuccessful: false,
   }),
 
   computed: {
@@ -96,6 +105,7 @@ export default {
 
   methods: {
     async checkout() {
+      this.isLoading = true;
       const url = `${process.env.VUE_APP_SERVER_URL}/api/orders`;
       const ret = await axios.post(url, {
         name: this.name,
@@ -108,6 +118,8 @@ export default {
 
       if (ret) {
         console.log(ret);
+        this.isLoading = false;
+        this.isSuccessful = true;
       }
     },
   },
