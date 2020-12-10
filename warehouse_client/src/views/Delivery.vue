@@ -3,7 +3,7 @@
     <v-layout align-start justify-center>
       <v-flex xs4 class="elevation-1 pa-3 ma-2">
         <v-list two-line>
-          <v-subheader> Validation </v-subheader>
+          <v-subheader> Validation ({{ items.length }}) </v-subheader>
           <draggable
             v-model="items"
             :options="{ group: 'people' }"
@@ -17,7 +17,7 @@
       </v-flex>
       <v-flex xs4 class="elevation-1 pa-3 ma-2">
         <v-list two-line>
-          <v-subheader> Packaging </v-subheader>
+          <v-subheader> Packaging ({{ items2.length }}) </v-subheader>
           <draggable
             v-model="items2"
             :options="{ group: 'people' }"
@@ -31,7 +31,7 @@
       </v-flex>
       <v-flex xs4 class="elevation-1 pa-3 ma-2">
         <v-list two-line>
-          <v-subheader> Courier Delivery </v-subheader>
+          <v-subheader> Courier Delivery ({{ items3.length }}) </v-subheader>
           <draggable
             v-model="items3"
             :options="{ group: 'people' }"
@@ -45,7 +45,7 @@
       </v-flex>
       <v-flex xs4 class="elevation-1 pa-3 ma-2">
         <v-list two-line>
-          <v-subheader> Delivered </v-subheader>
+          <v-subheader> Delivered ({{ items4.length }}) </v-subheader>
           <draggable
             v-model="items4"
             :options="{ group: 'people' }"
