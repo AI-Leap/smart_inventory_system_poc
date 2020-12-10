@@ -3,28 +3,72 @@
     <v-layout align-start justify-center>
       <v-flex xs4 class="elevation-1 pa-3 ma-2">
         <v-list two-line>
-          <v-subheader> FIRST LIST </v-subheader>
+          <v-subheader> Validation </v-subheader>
           <draggable
             v-model="items"
             :options="{ group: 'people' }"
             style="min-height: 10px"
           >
             <template v-for="(item, i) in items">
-              <label :key="i">{{ item }}</label>
+              <v-card :key="i">
+                <v-card-title>
+                  {{ item.title }}
+                </v-card-title>
+              </v-card>
             </template>
           </draggable>
         </v-list>
       </v-flex>
       <v-flex xs4 class="elevation-1 pa-3 ma-2">
         <v-list two-line>
-          <v-subheader> SECOND LIST </v-subheader>
+          <v-subheader> Packaging </v-subheader>
           <draggable
             v-model="items2"
             :options="{ group: 'people' }"
             style="min-height: 10px"
           >
             <template v-for="(item, i) in items2">
-              <label :key="i">{{ item }}</label>
+              <v-card :key="i">
+                <v-card-title>
+                  {{ item.title }}
+                </v-card-title>
+              </v-card>
+            </template>
+          </draggable>
+        </v-list>
+      </v-flex>
+      <v-flex xs4 class="elevation-1 pa-3 ma-2">
+        <v-list two-line>
+          <v-subheader> Courier Delivery </v-subheader>
+          <draggable
+            v-model="items3"
+            :options="{ group: 'people' }"
+            style="min-height: 10px"
+          >
+            <template v-for="(item, i) in items3">
+              <v-card :key="i">
+                <v-card-title>
+                  {{ item.title }}
+                </v-card-title>
+              </v-card>
+            </template>
+          </draggable>
+        </v-list>
+      </v-flex>
+      <v-flex xs4 class="elevation-1 pa-3 ma-2">
+        <v-list two-line>
+          <v-subheader> Delivered </v-subheader>
+          <draggable
+            v-model="items4"
+            :options="{ group: 'people' }"
+            style="min-height: 10px"
+          >
+            <template v-for="(item, i) in items4">
+              <v-card :key="i">
+                <v-card-title>
+                  {{ item.title }}
+                </v-card-title>
+              </v-card>
             </template>
           </draggable>
         </v-list>
@@ -73,10 +117,12 @@ export default {
         {
           id: 5,
           avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/5.jpg',
-          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+          title: 'Summer BBQ',
           subtitle: 'Subtitle 5',
         },
       ],
+      items3: [],
+      items4: [],
     };
   },
 };
