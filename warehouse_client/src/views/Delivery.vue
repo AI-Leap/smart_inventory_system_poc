@@ -8,6 +8,7 @@
             v-model="items"
             :options="{ group: 'people' }"
             style="min-height: 10px"
+            @change="log"
           >
             <template v-for="(item, i) in items">
               <DeliveryItem :key="i" :item="item" />
@@ -22,6 +23,7 @@
             v-model="items2"
             :options="{ group: 'people' }"
             style="min-height: 10px"
+            @change="log"
           >
             <template v-for="(item, i) in items2">
               <DeliveryItem :key="i" :item="item" />
@@ -36,6 +38,7 @@
             v-model="items3"
             :options="{ group: 'people' }"
             style="min-height: 10px"
+            @change="log"
           >
             <template v-for="(item, i) in items3">
               <DeliveryItem :key="i" :item="item" />
@@ -50,6 +53,7 @@
             v-model="items4"
             :options="{ group: 'people' }"
             style="min-height: 10px"
+            @change="log"
           >
             <template v-for="(item, i) in items4">
               <DeliveryItem :key="i" :item="item" />
@@ -104,6 +108,41 @@ export default {
           order,
         },
       });
+    },
+
+    log(event) {
+      if (event.added == null) return;
+      const { id } = event.added.element;
+      let found = this.items.find((e) => e.id === id);
+      // let status = 0;
+      if (found != null) {
+        const status = 0;
+        console.log({ id, status });
+        return;
+      }
+
+      console.log('searching 2');
+      found = this.items2.find((e) => e.id === id);
+      if (found != null) {
+        const status = 1;
+        console.log({ id, status });
+        return;
+      }
+
+      console.log('searching 3');
+      found = this.items3.find((e) => e.id === id);
+      if (found != null) {
+        const status = 2;
+        console.log({ id, status });
+        return;
+      }
+
+      console.log('searching 4');
+      found = this.items4.find((e) => e.id === id);
+      if (found != null) {
+        const status = 3;
+        console.log({ id, status });
+      }
     },
   },
 
