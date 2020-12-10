@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const uploadMiddleware = require('../middlewares/upload.middleware');
+const videoMiddleware = require('../middlewares/video.middleware');
 const AIController = require('../controllers/ai.controller');
 
-router.post('/', uploadMiddleware.single('image'), async (req, res) => {
+router.post('/images', uploadMiddleware.single('image'), async (req, res) => {
+  console.log(req.body);
+  return res.status(200).send();
+});
+
+router.post('/videos', videoMiddleware.single('image'), async (req, res) => {
   console.log(req.body);
   return res.status(200).send();
 });
