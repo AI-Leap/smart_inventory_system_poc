@@ -18,6 +18,16 @@ const controller = {
       return res.status(200).send(JSON.stringify(results));
     });
   },
+
+  updateOrderStatus: async (req, res) => {
+    const { id } = req.params;
+    const { delivery_status } = req.body;
+    const query = `UPDATE orders SET delivery_status = ${delivery_status} WHERE id = ${id};`;
+    await connection.query(query);
+
+    return res.status(200).send();
+  },
+
 };
 
 module.exports = controller;

@@ -110,6 +110,14 @@ export default {
       });
     },
 
+    async updateOrderStatus(id, status) {
+      const url = `${process.env.VUE_APP_SERVER_URL}/orders/${id}`;
+      const ret = await axios.patch(url, {
+        delivery_status: status,
+      });
+      console.log(ret);
+    },
+
     log(event) {
       if (event.added == null) return;
       const { id } = event.added.element;
@@ -118,6 +126,7 @@ export default {
       if (found != null) {
         const status = 0;
         console.log({ id, status });
+        this.updateOrderStatus(id, status);
         return;
       }
 
@@ -126,6 +135,7 @@ export default {
       if (found != null) {
         const status = 1;
         console.log({ id, status });
+        this.updateOrderStatus(id, status);
         return;
       }
 
@@ -134,6 +144,7 @@ export default {
       if (found != null) {
         const status = 2;
         console.log({ id, status });
+        this.updateOrderStatus(id, status);
         return;
       }
 
@@ -142,6 +153,7 @@ export default {
       if (found != null) {
         const status = 3;
         console.log({ id, status });
+        this.updateOrderStatus(id, status);
       }
     },
   },
