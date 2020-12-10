@@ -24,7 +24,9 @@
               stream
               :value="`${(order.delivery_status * 25) + 25}`"
               height="30"
-            />
+            >
+              {{ getDeliveryStatus(order.delivery_status) }}
+            </v-progress-linear>
           </v-col>
         </v-row>
       </v-list-item>
@@ -40,6 +42,11 @@ export default {
   }),
 
   methods: {
+    getDeliveryStatus(status) {
+      const statuses = ['Validated', 'Packaged', 'Couriered', 'Delivered'];
+      return statuses[status];
+    },
+
     async getOrders() {
       const { email } = this.$store.state;
       if (email.length === 0) return;
