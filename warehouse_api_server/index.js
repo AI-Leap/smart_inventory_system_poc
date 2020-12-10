@@ -2,6 +2,8 @@ var http = require('http');
 var createError = require('http-errors');
 var bodyParser = require('body-parser');
 require('./database/connection');
+require('dotenv').config();
+// app.use('/api/upload', UploadRoute);
 var express = require('express');
 var cors = require('cors');
 const morgan = require('morgan');
@@ -19,12 +21,11 @@ app.use(bodyParser.urlencoded({limit: '500mb', extended: true, parameterLimit:50
 // Routes
 var InventoryRoute = require('./routes/InventoryRoute');
 var OrderRoute = require('./routes/OrderRoute');
-var UploadRoute = require('./routes/UploadRoute');
 // var SurveyRoute = require('./routes/SurveyRoute');
 // var UserRoute = require('./routes/UserRoute');
 app.use('/api/inventory', InventoryRoute);
 app.use('/api/order', OrderRoute);
-app.use('/api/upload', UploadRoute);
+app.use('/api/ai', require('./routes/ai.routes'));
 // app.use('/api/user', UserRoute);
 
 app.use(function(req, res, next) {
@@ -40,7 +41,7 @@ app.use(function(req, res, next) {
 //   res.setHeader('Access-Control-Allow-Credentials', true);
 //   next();
 // });
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 app.set('port', port);
 const server = http.createServer(app);
 server.listen(port,() => {
