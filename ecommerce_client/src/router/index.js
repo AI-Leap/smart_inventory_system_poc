@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Order from '../views/Order.vue';
 import Checkout from '../views/Checkout.vue';
+import Item from '../views/Item.vue';
+import PackageTracker from '../views/PackageTracker.vue';
 
 Vue.use(VueRouter);
 
@@ -29,6 +31,16 @@ const routes = [
     path: '/checkout',
     name: 'checkout',
     component: Checkout,
+  },
+  {
+    path: '/item',
+    name: 'item',
+    component: Item,
+  },
+  {
+    path: '/package',
+    name: 'package',
+    component: PackageTracker,
   },
 ];
 
