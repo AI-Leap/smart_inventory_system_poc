@@ -9,5 +9,6 @@ router.post('/', uploadMiddleware.single('image'), async (req, res) => {
 });
 
 router.get('/images/:key', AIController.getImageAnalysis);
+router.get('/videos/:key', AIController.getVideoAnalysis);
 
 module.exports = router;
