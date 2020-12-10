@@ -23,6 +23,12 @@
         </v-btn>
       </v-col>
     </v-row>
+    <v-row>
+      <v-data-table
+        :headers="headers"
+        :items="results"
+      />
+    </v-row>
   </v-container>
 </template>
 
@@ -34,6 +40,21 @@ export default {
     image: null,
     isUploading: false,
     isGetting: false,
+    results: [],
+    headers: [
+      {
+        text: 'Label',
+        value: 'label',
+      },
+      {
+        text: 'Confidence',
+        value: 'confidence',
+      },
+      {
+        text: 'Timestamp',
+        value: 'timestamp',
+      },
+    ],
   }),
 
   methods: {
@@ -68,6 +89,7 @@ export default {
       if (ret) {
         this.isGetting = false;
         console.log(ret);
+        this.results = ret.data;
       }
     },
   },
