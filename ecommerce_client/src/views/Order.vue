@@ -1,14 +1,18 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="3" v-for="i in 9" :key="i">
+      <v-col cols="3" v-for="(item, i) in inventory" :key="i">
         <v-card :key="i" elevation="2" outlined shaped>
-          <v-card-title> Product {{ i }} </v-card-title>
+          <v-card-title> {{ item.name }} </v-card-title>
           <v-card-text>
+            <v-img
+              contain
+              :src="item.url"
+              max-height="200"
+            />
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
             officiis obcaecati consequatur, molestiae autem nostrum voluptatibus
             commodi cumque! Assumenda, iusto praesentium officia quisquam illum
-            magnam fuga laboriosam nobis at voluptatum!
           </v-card-text>
           <v-card-actions>
             <v-row>
@@ -36,6 +40,12 @@ export default {
   methods: {
     addToCart(itemId) {
       this.$store.dispatch('addToCart', itemId);
+    },
+  },
+
+  computed: {
+    inventory() {
+      return this.$store.state.inventory;
     },
   },
 };
