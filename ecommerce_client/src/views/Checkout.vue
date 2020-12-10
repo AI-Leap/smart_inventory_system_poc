@@ -105,6 +105,8 @@ export default {
 
   methods: {
     async checkout() {
+      this.$store.dispatch('setEmail', this.email);
+
       this.isLoading = true;
       const url = `${process.env.VUE_APP_SERVER_URL}/api/orders`;
       const ret = await axios.post(url, {

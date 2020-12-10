@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     cart: [],
+
+    email: '',
 
     inventory: [
       {
@@ -86,12 +89,19 @@ export default new Vuex.Store({
     addToCart: (state, item) => {
       state.cart.push(item);
     },
+    setEmail: (state, email) => {
+      state.email = email;
+    },
   },
   actions: {
     addToCart: ({ commit }, item) => {
       commit('addToCart', item);
     },
+    setEmail: ({ commit }, email) => {
+      commit('setEmail', email);
+    },
   },
   modules: {
   },
+  plugins: [createPersistedState()],
 });
