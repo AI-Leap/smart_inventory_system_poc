@@ -13,7 +13,8 @@ const s3 = new aws.S3();
 const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === 'video/mp4' ||
-    file.mimetype === 'video/mov'
+    file.mimetype === 'video/mov' ||
+    file.mimetype.includes('video')
   ) {
     return cb(null, true);
   } else {
